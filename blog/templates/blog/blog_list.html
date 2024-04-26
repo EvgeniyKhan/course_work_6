@@ -1,0 +1,24 @@
+{% extends 'clients/base.html' %}
+{% load tag %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        {% for object in object_list %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{ object.title }}</h5>
+                    <p class="card-text">{{ object.content|truncatechars:150 }}</p>
+                    <p class="card-text">Дата публикации: {{ object.created_at }}</p>
+                </div>
+                <div class="card-footer">
+                    <a href="{% url 'blog:blog_detail' object.pk %}" class="btn btn-primary btn-sm">Подробнее</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

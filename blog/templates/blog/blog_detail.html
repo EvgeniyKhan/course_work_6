@@ -1,0 +1,24 @@
+{% extends 'clients/base.html' %}
+{% load tag %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <img class="card-img-top" src="{{ object.preview | mymedia }}" alt="{{ object.title }}">
+                <div class="card-body">
+                    <h1 class="card-title">{{ object.title }}</h1>
+                    <p class="card-text">{{ object.content }}</p>
+                    <p class="card-text">Количество просмотров: {{ object.count_views }}</p>
+                    <p class="card-text">Дата публикации: {{ object.created_at }}</p>
+                    <a href="{% url 'blog:blog_list' %}" class="btn btn-sm btn-outline-secondary">
+                        Вернуться назад к списку новостей
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
