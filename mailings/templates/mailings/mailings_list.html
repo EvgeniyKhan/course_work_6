@@ -1,0 +1,54 @@
+{% extends 'clients/base.html' %}
+
+{% block content %}
+    <div class="container mt-4">
+        {% if not user.is_staff %}
+            <div class="row mb-3">
+                <div class="col-12">
+                    <a href="{% url 'mailings:create_mailings' %}" class="btn btn-primary">Добавить рассылку</a>
+                </div>
+            </div>
+        {% endif %}
+
+        <div class="row">
+            {% for object in object_list %}
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ object.name }}</h5>
+                            <p class="card-text">Автор: {{ object.owner }}</p>
+                            <p class="card-text">Время старта рассылки: {{ object.start_time }}</p>
+                            <p class="card-text">Время окончания рассылки: {{ object.end_time }}</p>
+                            <p class="card-text">Периодичность рассылки: {{ object.custom_frequency }}</p>
+                            <p class="card-text">Получатели:
+                                {% for client in object.clients.all %}
+                                    {{ client.name }}{% if not forloop.last %}, {% endif %}
+                                {% endfor %}
+                            </p>
+                            <p class="card-text">Тема письма: {{ object.message }}</p>
+                            <p class="card-text">Статус письма: {{ object.status }}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    {% if user.is_staff %}
+                                        {% if object.is_active %}
+                                            <a href="{% url 'mailings:toggle_activity' object.pk %}" class="btn btn-warning">Отключить</a>
+                                        {% else %}
+                                            <a href="{% url 'mailings:toggle_activity' object.pk %}" class="btn btn-success">Активировать</a>
+                                        {% endif %}
+                                    {% endif %}
+                                    <a href="{% url 'mailings:view_mailings' object.pk %}" class="btn btn-info">Подробнее</a>
+                                    <a class="btn btn-primary" href="{% url 'mailings:update_mailings' object.pk %}">Редактировать</a>
+                                    <a class="btn btn-danger" href="{% url 'mailings:delete_mailings' object.pk %}">Удалить</a>
+                                    {% if not user.is_staff %}
+                                        <a class="btn btn-primary" href="{% url 'mailings:mailings_update' object.pk %}">Редактировать</a>
+                                        <a class="btn btn-danger" href="{% url 'mailings:delete_mailings' object.pk %}">Удалить</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

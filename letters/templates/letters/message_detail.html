@@ -1,0 +1,13 @@
+{% extends 'clients/base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">{{ object.letter_subject | title }}</h1>
+    <div class="card mx-auto" style="max-width: 24rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{ object.letter_subject | upper }}</h5>
+            <p class="card-text">Описание: {{ object.letter_body }}</p>
+            <a href="{% url 'letters:letters_list' %}" class="btn btn-success mt-3">Назад</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

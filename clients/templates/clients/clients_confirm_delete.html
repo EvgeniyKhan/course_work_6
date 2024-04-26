@@ -1,0 +1,24 @@
+{% extends 'clients/base.html' %}
+{% block content %}
+
+<div class="container">
+    <div class="post">
+        <header class="post-header">
+            <div class="post-image">
+                <img src="">
+            </div>
+            <section>
+                <form method="post">
+                    {% csrf_token %}
+                    <p>Хотите удалить карточку клиента "{{ object.name }}"?</p>
+                    <div class="btn-group">
+                        <button type="submit" class="btn btn-sm btn-success">Подтвердить</button>
+                        <a href="{% url 'clients:clients_list' %}" class="btn btn-outline-secondary">Отмена</a>
+                    </div>
+                </form>
+            </section>
+        </header>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'clients/base.html' %}
+{% block content %}
+
+<div class="container">
+    <div class="post">
+        <div class="post-header">
+            <div class="post-image">
+                <img src="" alt="Client Image">
+            </div>
+            <h2>Детали клиента:</h2>
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-text"><strong>ФИО:</strong> {{ object.name }}</p>
+                    <p class="card-text"><strong>Контактный email:</strong> {{ object.client_email }}</p>
+                    <p class="card-text"><strong>Комментарий:</strong> {{ object.comment }}</p>
+                </div>
+            </div>
+            <div class="post-actions">
+                <a href="{% url 'clients:clients_list' %}" class="btn btn-outline-secondary">Вернуться назад к списку</a>
+                <a href="{% url 'clients:delete_client' object.pk %}" class="btn btn-outline-danger">Удалить</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'clients/base.html' %}
+{% block content %}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card mt-5">
+                <div class="card-header">
+                    <h4 class="card-title">Произведенные рассылки</h4>
+                </div>
+                <div class="card-body">
+                    {% for object in object_list %}
+                    <div class="mb-4">
+                        <h5>{{ object.time_log }}</h5>
+                        <p>Статус попытки: {{ object.status_display }}</p>
+                        <p>Тип рассылки: {{ object.mailings }}</p>
+                        {% if object.image %}
+                        <img src="{{ object.image.url }}" alt="{{ object.name }}" class="img-fluid mt-3">
+                        {% endif %}
+                        <hr>
+                    </div>
+                    {% empty %}
+                    <p class="text-center">Рассылки отсутствуют</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
