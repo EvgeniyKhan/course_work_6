@@ -20,7 +20,7 @@ class ClientCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Client
     login_url = 'users:login'
     form_class = ClientsForm
-    success_url = reverse_lazy('clients:client_list')
+    success_url = reverse_lazy('clients:clients_list')
     template_name = 'clients/clients_form.html'
 
     def form_valid(self, form):
@@ -62,7 +62,7 @@ class ClientListView(ListView):
                 Словарь контекста данных с добавленным списком всех клиентов.
             """
         context_data = super().get_context_data(*args, **kwargs)
-        context_data['client_list'] = Client.objects.all()
+        context_data['clients_list'] = Client.objects.all()
         return context_data
 
     def get_queryset(self, **kwargs: Any) -> Any:
@@ -92,7 +92,7 @@ class ClientUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     login_url = 'users:login'
     form_class = ClientsForm
     template_name = 'clients/clients_form.html'
-    success_url = reverse_lazy('clients:client_list')
+    success_url = reverse_lazy('clients:clients_list')
 
     def test_func(self) -> Any:
         """Проверяет разрешение доступа для пользователя.
