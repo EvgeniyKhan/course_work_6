@@ -15,6 +15,7 @@ class MailingCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     login_url = 'users:login'
     form_class = MailingForm
     template_name = 'mailings/mailing_form.html'
+    success_url = reverse_lazy('mailings:mailings_list')
 
     def form_valid(self, form):
         """Обрабатывает данные формы при их корректной валидации.

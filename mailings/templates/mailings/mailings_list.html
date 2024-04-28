@@ -40,7 +40,7 @@
                                     <a class="btn btn-primary" href="{% url 'mailings:update_mailings' object.pk %}">Редактировать</a>
                                     <a class="btn btn-danger" href="{% url 'mailings:delete_mailings' object.pk %}">Удалить</a>
                                     {% if not user.is_staff %}
-                                        <a class="btn btn-primary" href="{% url 'mailings:mailings_update' object.pk %}">Редактировать</a>
+                                        <a class="btn btn-primary" href="{% url 'mailings:update_mailings' object.pk %}">Редактировать</a>
                                         <a class="btn btn-danger" href="{% url 'mailings:delete_mailings' object.pk %}">Удалить</a>
                                     {% endif %}
                                 </div>
